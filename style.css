@@ -1,0 +1,391 @@
+:root {
+  --background: #f2f2f2;
+  --primary: #2d5273;
+  --accent: #736346;
+  --text: #262626;
+
+  --background-100: #f2f2f273;
+  --background-200: #f2f2f2ea;
+  --bg-200: #e8e8e8;
+  --bg-300: #a4a5a6;
+  --primary-200: #5c7ea2;
+  --primary-300: #bddfff;
+  --accent-200: #fff3d1;
+  --accent-300: #4e4e4e;
+
+  --gradient: linear-gradient(
+    180deg,
+    rgba(242, 242, 242, 0.192) 0%,
+    rgba(173, 189, 205, 0.217) 50%,
+    rgba(92, 126, 162, 0.639) 100%,
+    rgba(45, 82, 115, 0.874562324929972) 100%
+  );
+}
+
+/* =============================== */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+html {
+  font-family: Segoe, Verdana, sans-serif;
+  color: var(--text);
+}
+
+#container {
+  width: 100%; /* fixo: 720px */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--background);
+  /* uma hora para de diminuir */
+  min-width: 720px;
+  /* uma hora para de esticar */
+  /* max-width: 960px; */
+  min-height: 100vh;
+}
+
+#topo {
+  width: 95%;
+  height: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  border-bottom: solid 2px var(--primary);
+  padding-bottom: 1em;
+  border-radius: 0.2em;
+  background: var(--background-100);
+}
+
+#logo {
+  width: 60%;
+  font-size: 1.7em;
+  align-items: center;
+  margin-left: 0.5em;
+}
+#logo h1 {
+  color: var(--primary);
+}
+
+#navegacao {
+  margin-right: 1em;
+  width: 40%;
+}
+
+#navegacao ul {
+  width: 100%;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  margin-top: 0.8em;
+  justify-content: space-around;
+}
+#navegacao li {
+  display: flex;
+  height: 4em;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+#navegacao li:hover {
+  border-bottom: 1px solid var(--primary-200);
+  background: var(--gradient);
+  border-radius: 10%;
+}
+
+#navegacao li a {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 18px;
+  padding: 1.6em 1.2em;
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+#navegacao li a:hover {
+  color: var(--background);
+}
+
+#home,
+#produtos,
+#contato,
+#sobre {
+  width: 100%;
+  height: 100vh;
+  padding-top: 3.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+#home {
+  background-color: var(--background);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  background-attachment: fixed;
+  color: var(--bg-200);
+  justify-content: center;
+  align-items: center;
+  /* background-image: url('./assets/images/v880-techi-02-a.jpg'); */
+}
+
+#home h4 {
+  color: var(--text);
+  text-align: center;
+  font-size: 3em;
+  font-weight: lighter;
+  margin-left: 2em;
+  transition: 1s;
+  animation-name: textAnimate2;
+  animation-duration: 3s;
+
+  animation-timing-function: ease-in-out;
+}
+#home h4 span {
+  color: var(--primary);
+}
+#home h3 {
+  color: var(--text);
+  text-align: center;
+  font-size: 3em;
+  font-weight: lighter;
+  margin-right: 2em;
+  transition: 2s;
+  animation-name: textAnimate;
+  animation-duration: 3s;
+
+  animation-timing-function: ease-in-out;
+}
+#home h3 span {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: var(--primary);
+  font-style: normal;
+}
+
+/* ======
+animação da home
+====== */
+
+@keyframes textAnimate {
+  0% {
+    margin-right: 5.4em;
+  }
+  50% {
+    margin-right: 1.5em;
+  }
+  100% {
+  }
+}
+@keyframes textAnimate2 {
+  0% {
+    margin-left: 5.4em;
+  }
+  50% {
+    margin-left: 1.5em;
+  }
+  100% {
+  }
+}
+
+#rodape {
+}
+
+/* ;;;;;;;;;;;;
+SOBRE
+;;;;;;;;;;;; */
+#sobre {
+  background: var(--background) url("./assets/images/img2.jpg");
+  background-attachment: fixed;
+}
+#sobre #conteudo {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#sobre #conteudo div {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+#sobre #conteudo h4 {
+  color: var(--primary);
+  position: relative;
+  top: -3.5em;
+  font-size: 28px;
+}
+#sobre #conteudo p {
+  text-align: justify;
+  width: 40%;
+  max-height: 9rem;
+  font-size: 18px;
+  padding: 1em 1.2em;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: 0.7s;
+}
+
+#sobre #conteudo p:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--primary);
+}
+#sobre #conteudo .pL {
+  position: relative;
+  left: -1em;
+  top: -4rem;
+}
+#sobre #conteudo .pR {
+  position: relative;
+  right: -8em;
+  top: 2rem;
+}
+
+/* ======
+contato
+====== */
+
+#contato #area {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#contato #area ul li {
+  padding: 0.5em;
+  margin-bottom: 0.1em;
+  color: #000;
+}
+#contato #area li span {
+  margin-right: 0.5em;
+  color: var(--primary);
+}
+#contato #area li i {
+  margin-right: 0.5em;
+}
+
+#area p {
+  width: 60%;
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 18px;
+}
+
+/* 
+--------------------------------------------
+FONTES 
+-------------------------------------------- 
+*/
+
+@font-face {
+  font-family: Segoe;
+  src: url("./assets/fonts/SegoeUI.woff");
+}
+
+/* 
+--------------------------------------------
+SCROLL BAR
+-------------------------------------------- 
+*/
+body::-webkit-scrollbar {
+  width: 0.4em; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--bg-200); /* color of the tracking area */
+  border-radius: 5em;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 5em;
+  background-color: var(--primary-200); /* color of the scroll thumb */
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ///////////////////////// */
+
+#area .ball {
+  position: absolute;
+  top: 95.5em;
+  left: 44em;
+  width: 0.7em;
+  height: 0.7em;
+  background-color: var(--primary);
+  border-radius: 5em;
+  content: " ";
+  animation: bounce 5s ease infinite alternate-reverse;
+}
+
+@keyframes bounce {
+  0% {
+    animation-timing-function: ease-in;
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+
+  24% {
+    opacity: 1;
+  }
+
+  40% {
+    animation-timing-function: ease-in;
+    transform: translateY(-8px);
+  }
+
+  65% {
+    animation-timing-function: ease-in;
+    transform: translateY(-6px);
+  }
+
+  82% {
+    animation-timing-function: ease-in;
+    transform: translateY(-3px);
+  }
+
+  93% {
+    animation-timing-function: ease-in;
+    transform: translateY(-2px);
+  }
+
+  25%,
+  55%,
+  75%,
+  87% {
+    animation-timing-function: ease-out;
+    transform: translateY(0px);
+  }
+
+  100% {
+    animation-timing-function: ease-out;
+    opacity: 1;
+    transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
