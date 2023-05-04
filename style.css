@@ -20,6 +20,12 @@
     rgba(92, 126, 162, 0.639) 100%,
     rgba(45, 82, 115, 0.874562324929972) 100%
   );
+
+  --gradientFinal: linear-gradient(
+    180deg,
+    #f2f2f2 20%,
+    rgba(165, 193, 220, 0.746) 100%
+  );
 }
 
 /* =============================== */
@@ -386,6 +392,10 @@ a {
   }
 }
 
+#produtos {
+  background: var(--gradientFinal);
+}
+
 #produtos #area {
   height: 100%;
   width: 100%;
@@ -397,7 +407,7 @@ a {
 #produtos #area h1 {
   font-size: 25px;
   color: var(--primary);
-  margin: 0.5em 0em 0.7em 0;
+  margin: 0em 0em 0.5em 0;
 }
 #area .card {
   padding: 1em 2em;
@@ -417,9 +427,8 @@ a {
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-.card .info {
-  font-size: 18px;
+#area .card:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 #area .colors {
@@ -445,6 +454,19 @@ a {
 }
 .img-product:hover {
   transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* formatação de textos no card  */
+#produtos .card .info span {
+  font-size: 11px;
+  color: var(--text);
+}
+#produtos .card .info p {
+  font-size: 15px;
+}
+#produtos .card .info h3 {
+  font-size: 22px;
 }
 
 /* 
