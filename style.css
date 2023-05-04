@@ -63,7 +63,8 @@ html {
   border-bottom: solid 2px var(--primary);
   padding-bottom: 1em;
   border-radius: 0.2em;
-  background: var(--background-100);
+  background: var(--background);
+  position: fixed;
 }
 
 #logo {
@@ -289,17 +290,8 @@ contato
   text-align: center;
   margin-bottom: 1em;
   font-size: 18px;
-}
-
-/* 
---------------------------------------------
-FONTES 
--------------------------------------------- 
-*/
-
-@font-face {
-  font-family: Segoe;
-  src: url("./assets/fonts/SegoeUI.woff");
+  animation: textAnimateColor 5s linear infinite;
+  transition: 1s;
 }
 
 /* 
@@ -340,12 +332,11 @@ a {
   background-color: var(--primary);
   border-radius: 5em;
   content: " ";
-  animation: bounce 5s ease infinite alternate-reverse;
+  animation: bounce 5s linear infinite;
 }
 
 @keyframes bounce {
   0% {
-    animation-timing-function: ease-in;
     opacity: 1;
     transform: translateY(-10px);
   }
@@ -355,22 +346,18 @@ a {
   }
 
   40% {
-    animation-timing-function: ease-in;
     transform: translateY(-8px);
   }
 
   65% {
-    animation-timing-function: ease-in;
     transform: translateY(-6px);
   }
 
   82% {
-    animation-timing-function: ease-in;
     transform: translateY(-3px);
   }
 
   93% {
-    animation-timing-function: ease-in;
     transform: translateY(-2px);
   }
 
@@ -378,14 +365,95 @@ a {
   55%,
   75%,
   87% {
-    animation-timing-function: ease-out;
     transform: translateY(0px);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.42);
   }
 
   100% {
-    animation-timing-function: ease-out;
     opacity: 1;
-    transform: translateY(0px);
-    transform: translateY(0px);
+
+    transform: translateY(-10px);
   }
+}
+
+@keyframes textAnimateColor {
+  0%,
+  100% {
+    color: var(--text);
+  }
+  50% {
+    color: var(--primary);
+  }
+}
+
+#produtos #area {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#produtos #area h1 {
+  font-size: 25px;
+  color: var(--primary);
+  margin: 0.5em 0em 0.7em 0;
+}
+#area .card {
+  padding: 1em 2em;
+  width: 80%;
+  min-height: 6em;
+  height: auto;
+  border: 1px solid red;
+  text-align: left;
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.5em;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card .info {
+  font-size: 18px;
+}
+
+#area .colors {
+  width: auto;
+  display: flex;
+}
+#area .colors .color {
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 5em;
+  content: " ";
+  margin-right: 0.5em;
+}
+
+#op1 {
+  background-color: var(--accent);
+}
+#op2 {
+  background-color: var(--primary);
+}
+.img-product {
+  transition: 0.5s;
+}
+.img-product:hover {
+  transform: scale(1.05);
+}
+
+/* 
+--------------------------------------------
+FONTES 
+-------------------------------------------- 
+*/
+
+@font-face {
+  font-family: Segoe;
+  src: url(./assets/fonts/SegoeUI.woff);
 }
