@@ -438,9 +438,10 @@ a {
 #area .colors .color {
   width: 0.8em;
   height: 0.8em;
-  border-radius: 5em;
+  border-radius: 0.2em;
   content: " ";
-  margin-right: 0.5em;
+  margin-right: 0.3em;
+  margin-top: 0.2em;
 }
 
 #op1 {
@@ -464,9 +465,21 @@ a {
 }
 #produtos .card .info p {
   font-size: 15px;
+  width: 100%;
 }
 #produtos .card .info h3 {
   font-size: 22px;
+}
+
+#produtos .card .infoExtra {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.infoExtra .extra {
 }
 
 /* 
