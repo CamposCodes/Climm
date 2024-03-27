@@ -75,7 +75,7 @@ html {
   padding-bottom: 1em;
   border-radius: 0.2em;
   background: var(--background);
-  position: fixed;
+  z-index: 999; /* Define uma camada acima dos outros elementos */
 }
 
 #logo {
@@ -139,7 +139,7 @@ html {
 }
 
 #home {
-  background-color: var(--background);
+  background: var(--gradientFinal);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: left;
