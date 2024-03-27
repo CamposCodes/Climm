@@ -13,6 +13,12 @@
   --accent-200: #fff3d1;
   --accent-300: #4e4e4e;
 
+  --mogno: #661204;
+  --cerejeira: #BD8E4E;
+  --nogueira: #553129;
+  --branco: #fefefe;
+
+
   --gradient: linear-gradient(
     180deg,
     rgba(242, 242, 242, 0.192) 0%,
@@ -442,17 +448,29 @@ a {
   content: " ";
   margin-right: 0.3em;
   margin-top: 0.2em;
-  border: 1px solid #000000;
+  cursor: pointer;
 }
 
 #op1 {
-  background-color: var(--accent);
+  background-color: var(--branco);
 }
 #op2 {
-  background-color: var(--primary);
+  background-color: var(--mogno);
 }
+#op3{
+  background-color: var(--nogueira);
+}
+#op4{
+  background-color: var(--cerejeira);
+}
+
+.cor_selected {
+  border: 2px solid var(--primary);
+}
+
 .img-product {
   transition: 0.5s;
+  margin: 0 auto;
 }
 .img-product:hover {
   transform: scale(1.05);
