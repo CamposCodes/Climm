@@ -38,3 +38,18 @@ function selecionarCor(elemento, card) {
       break;
   }
 }
+
+function mudarIcone(elemento) {
+  var icone = elemento.querySelector("i");
+  if (icone.classList.contains("fa-check")) {
+    icone.classList.remove("fa-check");
+    icone.classList.add("fa-plus");
+    icone.style.color = "";
+    icone.style.padding = "0.7em 0.8em";
+  } else {
+    icone.classList.remove("fa-plus");
+    icone.classList.add("fa-check");
+    icone.style.color = "green";
+    icone.style.padding = "0.7em 0.7em";
+  }
+}

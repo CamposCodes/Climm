@@ -505,6 +505,21 @@ a {
   width: 100%;
 }
 
+.card .botaoAdd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  padding: 0.2em;
+}
+
+.botaoAdd i {
+  color: var(--primary-300);
+  padding: 0.7em 0.8em;
+  border-radius: 3em;
+  background: rgba(255, 255, 255, 0.599);
+}
+
 /* 
 --------------------------------------------
 FONTES 
