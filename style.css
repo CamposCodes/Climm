@@ -339,59 +339,6 @@ a {
 
 /* ///////////////////////// */
 
-#area .ball {
-  position: absolute;
-  top: 95.5em;
-  left: 44em;
-  width: 0.7em;
-  height: 0.7em;
-  background-color: var(--primary);
-  border-radius: 5em;
-  content: " ";
-  animation: bounce 5s linear infinite;
-}
-
-@keyframes bounce {
-  0% {
-    opacity: 1;
-    transform: translateY(-10px);
-  }
-
-  24% {
-    opacity: 1;
-  }
-
-  40% {
-    transform: translateY(-8px);
-  }
-
-  65% {
-    transform: translateY(-6px);
-  }
-
-  82% {
-    transform: translateY(-3px);
-  }
-
-  93% {
-    transform: translateY(-2px);
-  }
-
-  25%,
-  55%,
-  75%,
-  87% {
-    transform: translateY(0px);
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.42);
-  }
-
-  100% {
-    opacity: 1;
-
-    transform: translateY(-10px);
-  }
-}
-
 @keyframes textAnimateColor {
   0%,
   100% {
@@ -447,6 +394,7 @@ a {
   padding-bottom: 0.2em;
 }
 #area .colors .color {
+  box-sizing: border-box;
   width: 1.5em;
   height: 1.5em;
   border-radius: 0.2em;
@@ -518,6 +466,7 @@ a {
   padding: 0.7em 0.8em;
   border-radius: 3em;
   background: rgba(255, 255, 255, 0.599);
+  cursor: pointer;
 }
 
 /* 
@@ -601,4 +550,54 @@ div #rodape {
   color: var(--branco);
   font-size: 15px;
   font-weight: bold;
+}
+
+/*----------------------*/
+
+.ball.animate {
+  animation: bounce 2s forwards; /* A animação dura 3 segundos com uma curva de timing customizada */
+}
+.ball {
+  width: 25px;
+  height: 25px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  position: absolute;
+}
+@keyframes bounce {
+  0% {
+    right: 100px;
+    bottom: -1180px;
+  }
+  10% {
+    bottom: -1080px;
+  }
+  20% {
+    bottom: -1180px;
+  }
+  30% {
+    bottom: -1080px;
+  }
+  40% {
+    bottom: -1180px;
+  }
+  50% {
+    bottom: -1080px;
+  }
+  60% {
+    bottom: -1180px;
+  }
+  70% {
+    bottom: -1080px;
+  }
+  80% {
+    bottom: -1180px;
+  }
+  90% {
+    bottom: -1140px;
+  }
+  100% {
+    right: 580px;
+    bottom: -1180px;
+  }
 }

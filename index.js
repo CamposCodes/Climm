@@ -53,3 +53,30 @@ function mudarIcone(elemento) {
     icone.style.padding = "0.7em 0.7em";
   }
 }
+
+$(document).ready(function () {
+  // Função para verificar se a seção #contato está visível no viewport
+  function isContactSectionVisible() {
+    var windowHeight = $(window).height();
+    var contactSectionTop = $("#contato").offset().top;
+    var contactSectionBottom = contactSectionTop + $("#contato").outerHeight();
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + windowHeight;
+
+    return (
+      contactSectionBottom > viewportTop && contactSectionTop < viewportBottom
+    );
+  }
+
+  // Verifica a visibilidade da seção #contato quando a página é carregada
+  if (isContactSectionVisible()) {
+    $(".ball").addClass("animate");
+  }
+
+  // Verifica a visibilidade da seção #contato ao rolar a página
+  $(window).scroll(function () {
+    if (isContactSectionVisible()) {
+      $(".ball").addClass("animate");
+    }
+  });
+});
