@@ -153,7 +153,6 @@ html {
   text-align: center;
   font-size: 3em;
   font-weight: lighter;
-  margin-left: 2em;
   transition: 1s;
   animation-name: textAnimate2;
   animation-duration: 3s;
@@ -364,16 +363,15 @@ a {
 #produtos #area h1 {
   font-size: 35px;
   color: var(--primary);
-  margin-bottom: 0.2em;
+  margin-top: -3em;
 }
 #area .card {
   padding: 0.5em 1em;
   width: 80%;
   min-height: 6em;
   height: auto;
-  border: 1px solid red;
   text-align: left;
-  margin-top: 0.6em;
+  margin-top: 0.8em;
   display: flex;
   justify-content: space-between;
   border-radius: 0.5em;
@@ -563,6 +561,7 @@ div #rodape {
   background-color: var(--primary);
   border-radius: 50%;
   position: absolute;
+  transition: 0.2s;
 }
 @keyframes bounce {
   0% {
@@ -600,4 +599,141 @@ div #rodape {
     right: 580px;
     bottom: -1180px;
   }
+}
+
+/*::::::::::::::::*/
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  #container {
+    max-width: 100%; /* fixo: 720px */
+    min-width: 320px;
+    margin: 0;
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    margin: 0; /* Removendo a margem */
+    padding: 0; /* Removendo o preenchimento */
+  }
+
+  #topo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    border-width: 2px 200px;
+    text-align: center;
+  }
+
+  #logo {
+    margin-bottom: 10px; /* Ajuste o espaçamento conforme necessário */
+  }
+
+  #navegacao {
+    width: 100%;
+  }
+
+  #navegacao ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: -1em;
+  }
+
+  #navegacao li {
+    margin-left: 10px; /* Espaçamento entre os itens do menu */
+  }
+
+  #navegacao li a {
+    padding: 0.2em; /* Ajuste o espaçamento dos links conforme necessário */
+  }
+
+  #home {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  #home h4,
+  #home h3 {
+    margin-top: -2em;
+    text-align: center;
+    font-size: 1.2em;
+    align-items: center;
+    margin: 0;
+    word-wrap: break-word;
+  }
+  #home h3 {
+    animation-name: textAnimate3Mobile;
+    transition: 1s;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+  #home h4 {
+    animation-name: textAnimate2Mobile;
+    transition: 0.2s;
+    animation-duration: 2s;
+  }
+
+  #home h3 span {
+    font-size: 1.3em;
+  }
+  @keyframes textAnimate2Mobile {
+    0% {
+      margin-top: 10em;
+      color: #00000000;
+    }
+    50% {
+      margin-top: 1em;
+    }
+    100% {
+      margin: 0;
+    }
+  }
+  @keyframes textAnimate3Mobile {
+    0% {
+      font-size: 0px;
+      color: #00000000;
+    }
+    50% {
+      color: var(--primary-200);
+    }
+    100% {
+      font-size: 1.3em;
+      color: var(--primary);
+    }
+  }
+
+  #sobre {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  #sobre .pR {
+    display: none;
+  }
+  #sobre .pl {
+    width: 100%;
+    margin: 0;
+  }
+
+  #produtos #area h1 {
+    font-size: 1.6em;
+  }
+
+  #produtos p {
+    display: none;
+  }
+}
+/* Estilos comuns para dispositivos móveis e tablets */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Estilos específicos para tablets */
+  /* Adicione estilos conforme necessário */
 }
