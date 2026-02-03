@@ -796,6 +796,8 @@ LOGO ANIMADO COM BOLA
   margin-top: 0.8em;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 2em;
   border-radius: 0.5em;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
@@ -807,6 +809,17 @@ LOGO ANIMADO COM BOLA
 }
 #area .card:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+#area .card .info {
+  flex: 0 0 auto;
+  max-width: 350px;
+}
+
+#area .card .img-product {
+  flex: 1;
+  min-width: 250px;
+  object-fit: contain;
 }
 
 #area .colors {
@@ -843,7 +856,6 @@ LOGO ANIMADO COM BOLA
 
 .img-product {
   transition: 0.5s;
-  margin: 0 auto;
 }
 .img-product:hover {
   transform: scale(1.05);
@@ -1396,6 +1408,7 @@ CARD ANIMATIONS & COUNTER BADGE
   .sobre-features {
     grid-template-columns: 1fr;
     gap: 1.5em;
+    padding: 0 1em;
   }
 
   .feature-icon {
@@ -1467,6 +1480,7 @@ CARD ANIMATIONS & COUNTER BADGE
   .resultados-grid {
     grid-template-columns: 1fr;
     gap: 1.5em;
+    padding: 0 1em;
   }
 
   .resultado-card {
@@ -1522,6 +1536,11 @@ CARD ANIMATIONS & COUNTER BADGE
   .info-content p {
     font-size: 16px;
     line-height: 1.7;
+  }
+
+  #rodape {
+    background: linear-gradient(135deg, var(--primary) 0%, #1e3a52 100%);
+    padding: 2em 1.5em;
   }
 
   .animated-logo {
@@ -1609,6 +1628,18 @@ CARD ANIMATIONS & COUNTER BADGE
 
   #area .card {
     width: 85%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #area .card .info {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #area .card .img-product {
+    flex: 0 0 auto;
+    min-width: auto;
   }
 
   #area .card p {
