@@ -663,7 +663,7 @@ RESULTADOS / ESTATÍSTICAS
 
 .resultado-counter {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 0.2em;
   margin-bottom: 1.5em;
@@ -674,7 +674,6 @@ RESULTADOS / ESTATÍSTICAS
   font-size: 28px;
   color: var(--primary-200);
   font-weight: bold;
-  margin-top: 8px;
   order: -1;
 }
 
