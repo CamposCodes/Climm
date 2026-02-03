@@ -910,15 +910,7 @@ rodapé
 
 /* FOOTER */
 #rodape {
-  background: linear-gradient(
-    180deg,
-    rgba(189, 215, 240, 0.55) 0%,
-    rgba(195, 220, 242, 0.5) 20%,
-    rgba(210, 230, 250, 0.4) 40%,
-    rgba(225, 240, 252, 0.25) 60%,
-    rgba(240, 245, 250, 0.12) 80%,
-    #ffffff 100%
-  );
+  background: linear-gradient(135deg, var(--primary) 0%, #1e3a52 100%);
   padding: 2.5em 2em;
   width: 100%;
   border-top: none;
@@ -946,11 +938,11 @@ rodapé
 .rodape-logo-text {
   font-size: 200px;
   font-weight: 300;
-  color: #000;
+  color: #ffffff;
   margin: 0;
   letter-spacing: -5px;
   line-height: 1;
-  opacity: 0.05;
+  opacity: 0.1;
   white-space: nowrap;
 }
 
@@ -960,7 +952,7 @@ rodapé
   align-items: flex-start;
   margin-bottom: 2.5em;
   padding-bottom: 2em;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .rodape-info {
@@ -970,7 +962,7 @@ rodapé
 
 .rodape-info h3 {
   font-size: 20px;
-  color: var(--primary);
+  color: #ffffff;
   font-weight: 400;
   margin-bottom: 0.5em;
   letter-spacing: -0.5px;
@@ -978,7 +970,7 @@ rodapé
 
 .rodape-info p {
   font-size: 14px;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
   font-weight: 300;
 }
@@ -994,7 +986,7 @@ rodapé
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--text);
+  color: #ffffff;
   font-weight: 400;
   margin-bottom: 1.2em;
 }
@@ -1010,7 +1002,7 @@ rodapé
 }
 
 .rodape-links-col ul li a {
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -1020,12 +1012,12 @@ rodapé
 }
 
 .rodape-links-col ul li a:hover {
-  color: var(--primary);
+  color: #ffffff;
   padding-left: 0.3em;
 }
 
 .rodape-links-col ul li {
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
 }
 
@@ -1038,7 +1030,7 @@ rodapé
 
 .rodape-bottom p {
   font-size: 13px;
-  color: #999;
+  color: rgba(255, 255, 255, 0.7);
   margin: 0;
   font-weight: 300;
 }
@@ -1050,14 +1042,14 @@ rodapé
 
 .rodape-bottom-links a {
   font-size: 13px;
-  color: #999;
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: all 0.3s ease;
   font-weight: 300;
 }
 
 .rodape-bottom-links a:hover {
-  color: var(--primary);
+  color: #ffffff;
 }
 
 /* FOOTER RESPONSIVE */
@@ -1262,8 +1254,9 @@ CARD ANIMATIONS & COUNTER BADGE
 
   .logo-link {
     flex-shrink: 0;
-    width: 100%;
+    width: auto;
     margin-bottom: 0.8em;
+    justify-content: center;
   }
 
   #logo {
@@ -1275,11 +1268,11 @@ CARD ANIMATIONS & COUNTER BADGE
   }
 
   .logo-desktop {
-    display: none;
+    display: block;
   }
 
   .logo-mobile {
-    display: block;
+    display: none;
   }
 
   #navegacao {
@@ -1458,6 +1451,10 @@ CARD ANIMATIONS & COUNTER BADGE
     display: none;
   }
 
+  #area .img-product {
+    border-radius: 16px !important;
+  }
+
   #resultados {
     padding-top: 3.5em;
   }
@@ -1473,7 +1470,7 @@ CARD ANIMATIONS & COUNTER BADGE
   }
 
   .resultado-card {
-    padding: 1.5em 1em;
+    padding: 1.5em 1.5em;
   }
 
   .counter-number {
