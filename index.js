@@ -1,12 +1,185 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Adiciona um evento de clique a todas as divs com a classe 'color'
+  // ========================================
+  // DESTAQUE DE SEÇÃO ATIVA NA NAVEGAÇÃO
+  // ========================================
+  const navLinks = document.querySelectorAll("#navegacao a");
+  const sections = document.querySelectorAll("section");
+
+  function updateActiveNav() {
+    let current = "";
+    const navbarHeight = 120; // altura do navbar
+
+    // Encontrar a seção mais próxima do topo da viewport
+    sections.forEach((section) => {
+      const sectionTop = section.getBoundingClientRect().top;
+      const sectionBottom = section.getBoundingClientRect().bottom;
+
+      // Se a seção está visível na viewport
+      if (sectionTop <= window.innerHeight / 2 && sectionBottom >= window.innerHeight / 2) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    // Remover classe ativa de todos os links
+    navLinks.forEach((link) => {
+      link.classList.remove("nav-active");
+    });
+
+    // Adicionar classe ativa ao link da seção atual
+    if (current !== "") {
+      const activeLink = document.querySelector(`#navegacao a[href="#${current}"]`);
+      if (activeLink) {
+        activeLink.classList.add("nav-active");
+      }
+    }
+  }
+
+  // Atualizar ao fazer scroll
+  window.addEventListener("scroll", updateActiveNav, { passive: true });
+  
+  // Atualizar na carga da página
+  updateActiveNav();
+
+  // ========================================
+  // SCROLL SUAVE COM VELOCIDADE CONTROLADA
+  // ========================================
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      const targetSection = document.querySelector(targetId);
+      
+      if (targetSection) {
+        targetSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    });
+  });
+
+  // ========================================
+  // VOLTAR AO TOPO AO CLICAR NA LOGO
+  // ========================================
+  const logoLink = document.querySelector(".logo-link");
+  if (logoLink) {
+    logoLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+
+  // ========================================
+  // SELETOR DE COR E ÍCONE
+  // ========================================
   var cores = document.querySelectorAll(".color");
   cores.forEach(function (cor) {
     cor.addEventListener("click", function () {
       selecionarCor(this, this.closest(".card").classList[1]);
     });
   });
+
+  // Inicializar cores selecionadas (op1) ao carregar a página
+  var coresIniciais = document.querySelectorAll(".color.cor_selected");
+  coresIniciais.forEach(function (cor) {
+    selecionarCor(cor, cor.closest(".card").classList[1]);
+  });
+
+  // ========================================
+  // FECHAR MENU HAMBURGER AO CLICAR EM LINK
+  // ========================================
+  // Menu hamburger foi removido - este código não é mais necessário
+
+  // ========================================
+  // INTERSECTION OBSERVER PARA ANIMAÇÕES AO SCROLL
+  // ========================================
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate");
+
+        // Se é um card de resultado, animar os contadores
+        if (
+          entry.target.classList.contains("resultado-card") &&
+          !entry.target.dataset.animated
+        ) {
+          animateCounters(entry.target);
+          entry.target.dataset.animated = "true";
+        }
+
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observar elementos com classe scroll-animate
+  const animatedElements = document.querySelectorAll(".scroll-animate");
+  animatedElements.forEach((element) => {
+    observer.observe(element);
+  });
+
+  // ========================================
+  // SCROLL-TO-TOP BUTTON
+  // ========================================
+  const scrollToTopBtn = document.getElementById("scroll-to-top");
+
+  window.addEventListener("scroll", function () {
+    if (window.pageYOffset > 300) {
+      scrollToTopBtn.classList.add("show");
+    } else {
+      scrollToTopBtn.classList.remove("show");
+    }
+  });
+
+  scrollToTopBtn.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  // ========================================
+  // ANIMAÇÃO BOLA CONTATO (jQuery)
+  // ========================================
+  $(document).ready(function () {
+    // Função para verificar se a seção #contato está visível no viewport
+    function isContactSectionVisible() {
+      var windowHeight = $(window).height();
+      var contactSectionTop = $("#contato").offset().top;
+      var contactSectionBottom = contactSectionTop + $("#contato").outerHeight();
+      var viewportTop = $(window).scrollTop();
+      var viewportBottom = viewportTop + windowHeight;
+
+      return (
+        contactSectionBottom > viewportTop && contactSectionTop < viewportBottom
+      );
+    }
+
+    // Verifica a visibilidade da seção #contato quando a página é carregada
+    if (isContactSectionVisible()) {
+      $(".ball").addClass("animate");
+    }
+
+    // Verifica a visibilidade da seção #contato ao rolar a página
+    $(window).scroll(function () {
+      if (isContactSectionVisible()) {
+        $(".ball").addClass("animate");
+      }
+    });
+  });
 });
+
+// ========================================
+// FUNÇÕES UTILITÁRIAS
+// ========================================
 
 function selecionarCor(elemento, card) {
   // Remove a classe 'cor_selected' de todas as cores do card
@@ -54,29 +227,31 @@ function mudarIcone(elemento) {
   }
 }
 
-$(document).ready(function () {
-  // Função para verificar se a seção #contato está visível no viewport
-  function isContactSectionVisible() {
-    var windowHeight = $(window).height();
-    var contactSectionTop = $("#contato").offset().top;
-    var contactSectionBottom = contactSectionTop + $("#contato").outerHeight();
-    var viewportTop = $(window).scrollTop();
-    var viewportBottom = viewportTop + windowHeight;
+// ========================================
+// ANIMAÇÃO DE CONTADORES (NÚMEROS SUBINDO)
+// ========================================
 
-    return (
-      contactSectionBottom > viewportTop && contactSectionTop < viewportBottom
-    );
-  }
+function animateCounters(card) {
+  const counterElements = card.querySelectorAll(".counter-number");
 
-  // Verifica a visibilidade da seção #contato quando a página é carregada
-  if (isContactSectionVisible()) {
-    $(".ball").addClass("animate");
-  }
+  counterElements.forEach((element) => {
+    const target = parseInt(element.dataset.target);
+    const duration = 2000; // 2 segundos
+    const steps = 60; // 60 frames
+    const increment = target / steps;
+    let current = 0;
+    let frameCount = 0;
 
-  // Verifica a visibilidade da seção #contato ao rolar a página
-  $(window).scroll(function () {
-    if (isContactSectionVisible()) {
-      $(".ball").addClass("animate");
-    }
+    const interval = setInterval(() => {
+      frameCount++;
+      current += increment;
+
+      if (frameCount >= steps) {
+        element.textContent = target;
+        clearInterval(interval);
+      } else {
+        element.textContent = Math.floor(current);
+      }
+    }, duration / steps);
   });
-});
+}

@@ -23,10 +23,13 @@
   </head>
   <body>
     <div id="container">
-      <div id="topo">
-        <div id="logo">
-          <h1>Climm</h1>
-        </div>
+      <nav id="topo">
+        <a href="#home" class="logo-link">
+          <div id="logo">
+            <h1 class="logo-desktop">climm</h1>
+            <h1 class="logo-mobile">C</h1>
+          </div>
+        </a>
         <div id="navegacao">
           <ul>
             <li><a href="#home">Home</a></li>
@@ -35,7 +38,7 @@
             <li><a href="#produtos">Produtos</a></li>
           </ul>
         </div>
-      </div>
+      </nav>
       <section id="home">
         <h3>Transforme seu ambiente com os forros <span>Climm.</span></h3>
         <h4>
@@ -43,64 +46,159 @@
           <span>forro de PVC!</span>
         </h4>
       </section>
+      <section id="resultados">
+        <div id="area-resultados">
+          <h1>Por que escolher a Climm?</h1>
+          <div class="resultados-grid">
+            <div class="resultado-card scroll-animate" data-index="0">
+              <div class="resultado-counter">
+                <span class="counter-symbol">+</span>
+                <span class="counter-number" data-target="5">0</span>
+              </div>
+              <h3>Anos de Experiência</h3>
+              <p>Confiança e expertise no mercado de forros PVC</p>
+            </div>
+            <div class="resultado-card scroll-animate" data-index="1">
+              <div class="resultado-counter">
+                <span class="counter-symbol">+</span>
+                <span class="counter-number" data-target="1000">0</span>
+              </div>
+              <h3>Clientes Satisfeitos</h3>
+              <p>Projetos residenciais e comerciais realizados</p>
+            </div>
+            <div class="resultado-card scroll-animate" data-index="2">
+              <div class="resultado-counter">
+                <span class="counter-symbol">%</span>
+                <span class="counter-number" data-target="100">0</span>
+              </div>
+              <h3>Qualidade Garantida</h3>
+              <p>Produtos premium com certificação de excelência</p>
+            </div>
+          </div>
+        </div>
+      </section>
       <section id="sobre">
         <div id="conteudo">
-          <h1>Sobre nós</h1>
-          <p class="pL">
-            <span>
-              A marca se destaca pela sua preocupação com a inovação, qualidade
-              e atendimento ao cliente. Seus forros em PVC são reconhecidos pela
-              durabilidade e praticidade, sendo ideais para ambientes
-              residenciais e comerciais.
-            </span>
-          </p>
-          <p class="pR">
-            <span>
-              A Climm é uma empresa especializada na fabricação de forros em PVC
-              de alta qualidade. Com anos de experiência no mercado, a Climm
-              oferece uma ampla variedade de produtos que vão desde forros em
-              PVC convencionais, lisos, coloridos, acabamentos, entre outras
-              opções.
-            </span>
-          </p>
+          <div class="sobre-header">
+            <h1>Sobre Nós</h1>
+            <p class="sobre-subtitle">Inovação e Qualidade em Forros de PVC</p>
+          </div>
+          
+          <div class="sobre-content">
+            <div class="sobre-text-block">
+              <p class="sobre-intro">
+                Há mais de 5 anos transformamos ambientes com soluções inovadoras em forros de PVC. 
+                Somos referência em qualidade, durabilidade e atendimento excepcional.
+              </p>
+            </div>
+
+            <div class="sobre-features">
+              <div class="feature-card scroll-animate" data-index="0">
+                <div class="feature-icon">
+                  <i class="fa fa-lightbulb-o"></i>
+                </div>
+                <h3>Inovação</h3>
+                <p>Soluções criativas e produtos de última geração para modernizar seu espaço</p>
+              </div>
+              
+              <div class="feature-card scroll-animate" data-index="1">
+                <div class="feature-icon">
+                  <i class="fa fa-check-circle"></i>
+                </div>
+                <h3>Qualidade</h3>
+                <p>Materiais premium com certificação de excelência e garantia de durabilidade</p>
+              </div>
+              
+              <div class="feature-card scroll-animate" data-index="2">
+                <div class="feature-icon">
+                  <i class="fa fa-smile-o"></i>
+                </div>
+                <h3>Satisfação</h3>
+                <p>Atendimento dedicado e suporte completo do projeto até a instalação</p>
+              </div>
+            </div>
+            <div class="sobre-cta">
+              <a href="#produtos" class="btn-primary">Conheça Nossos Produtos</a>
+            </div>
+            <div class="sobre-description">
+              <div class="desc-item scroll-animate" data-index="0">
+                <div class="desc-icon">
+                  <i class="fa fa-bullseye"></i>
+                </div>
+                <h4>Nossa Missão</h4>
+                <p>
+                  Transformar espaços com soluções inovadoras em forros de PVC. Qualidade superior com preços acessíveis para o melhor custo-benefício do mercado.
+                </p>
+              </div>
+
+              <div class="desc-item scroll-animate" data-index="1">
+                <div class="desc-icon">
+                  <i class="fa fa-star"></i>
+                </div>
+                <h4>Nossa Diferença</h4>
+                <p>
+                  Ampla variedade de forros: convencionais, lisos, coloridos e especializados. Reconhecidos pela durabilidade, praticidade e acabamento impecável.
+                </p>
+              </div>
+
+              <div class="desc-item scroll-animate" data-index="2">
+                <div class="desc-icon">
+                  <i class="fa fa-handshake-o"></i>
+                </div>
+                <h4>Nosso Compromisso</h4>
+                <p>
+                  Sustentabilidade e inovação contínua com rigoroso controle de qualidade. Mais de 1000 clientes confiaram em nós para renovar seus espaços com excelência.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <section id="contato">
         <div id="area">
-          <img
-            width="300"
-            style="margin: 0 auto"
-            src="./assets/images/logo.png"
-            alt=""
-          />
-          <div class="ball" data-scroll-animate></div>
-          <p>
-            Não perca mais tempo com soluções,
-            <span style="text-decoration: underline">
-              entre em contato conosco</span
-            >
-            e descubra como podemos ajudá-lo a renovar e inovar seu espaço com
-            os melhores forros de PVC do mercado
-          </p>
-          <ul>
-            <li>
-              <span><i class="fa fa-envelope-o"></i>Email:</span
-              >climmpvc@gmail.com
-            </li>
-            <li>
-              <span><i class="fa fa-phone"></i>Telefone:</span>(32) 9 8515-0220
-            </li>
-            <li>
-              <span><i class="fa fa-map-marker"></i>Localização:</span>Juiz de
-              Fora - MG
-            </li>
-          </ul>
+          <div id="contato-header">
+            <h2>Fale Conosco</h2>
+            <p>
+              Não perca mais tempo com soluções,entre em contato conosco
+              e descubra como podemos ajudá-lo a renovar e inovar seu espaço com
+              os melhores forros de PVC do mercado
+            </p>
+          </div>
+          <div id="contato-info">
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fa fa-envelope-o"></i>
+              </div>
+              <div class="info-content">
+                <h3>Email</h3>
+                <p>climmpvc@gmail.com</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fa fa-phone"></i>
+              </div>
+              <div class="info-content">
+                <h3>Telefone</h3>
+                <p>(32) 9 8515-0220</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fa fa-map-marker"></i>
+              </div>
+              <div class="info-content">
+                <h3>Localização</h3>
+                <p>Juiz de Fora - MG</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <section id="produtos">
         <div id="area">
           <h1>Nossos Produtos</h1>
-          <div class="card card1">
+          <div class="card card1 scroll-animate" data-index="0">
             <div class="info">
               <h3>PVC Frisado Climm</h3>
               <p>
@@ -114,7 +212,7 @@
               <div class="colors">
                 <div
                   id="op1"
-                  class="color"
+                  class="color cor_selected"
                   onclick="selecionarCor(this, 'card1')"
                 ></div>
                 <div
@@ -143,7 +241,7 @@
               style="border-radius: 0.2em"
             />
           </div>
-          <div class="card card2">
+          <div class="card card2 scroll-animate" data-index="1">
             <div class="info">
               <h3>PVC Liso Climm</h3>
               <p>
@@ -156,7 +254,7 @@
               <div class="colors">
                 <div
                   id="op1"
-                  class="color"
+                  class="color cor_selected"
                   onclick="selecionarCor(this, 'card2')"
                 ></div>
                 <div
@@ -185,7 +283,7 @@
               style="border-radius: 0.2em"
             />
           </div>
-          <div class="card extra">
+          <div class="card extra scroll-animate" data-index="2">
             <div class="botaoAdd" onclick="mudarIcone(this)">
               <i class="fa fa-plus"></i>
             </div>
@@ -205,37 +303,58 @@
         </div>
       </section>
       <section id="rodape">
-        <!-- Dentro da seção #rodape -->
-        <div id="rodape">
-          <div id="conteudo-rodape">
-            <div class="info-contato">
-              <h3>Entre em Contato</h3>
-              <ul>
-                <li><i class="fa fa-envelope-o"></i> climmpvc@gmail.com</li>
-                <li><i class="fa fa-phone"></i> (32) 9 8515-0220</li>
-                <li><i class="fa fa-map-marker"></i> Juiz de Fora - MG</li>
-              </ul>
+        <div class="rodape-container">
+          <div class="rodape-top">
+            <div class="rodape-info">
+              <h3>Climm</h3>
+              <p>Forros de PVC para transformar seu ambiente</p>
             </div>
-            <div class="redes-sociais">
-              <h3>Redes Sociais</h3>
-              <ul>
-                <li>
-                  <a href="#"><i class="fa fa-facebook"></i> Facebook</a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-twitter"></i> Twitter</a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-instagram"></i> Instagram</a>
-                </li>
-              </ul>
+            <div class="rodape-links-top">
+              <div class="rodape-links-col">
+                <h4>Explorar</h4>
+                <ul>
+                  <li><a href="#sobre">Sobre</a></li>
+                  <li><a href="#produtos">Produtos</a></li>
+                  <li><a href="#contato">Contato</a></li>
+                </ul>
+              </div>
+              <div class="rodape-links-col">
+                <h4>Siga-nos</h4>
+                <ul>
+                  <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
+                  <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                </ul>
+              </div>
+              <div class="rodape-links-col">
+                <h4>Contato</h4>
+                <ul>
+                  <li><a href="mailto:climmpvc@gmail.com">climmpvc@gmail.com</a></li>
+                  <li><a href="tel:(32)985150220">(32) 9 8515-0220</a></li>
+                  <li>Juiz de Fora - MG</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="direitos">
+
+          <div class="rodape-logo">
+            <h2 class="rodape-logo-text">Climm</h2>
+          </div>
+
+          <div class="rodape-bottom">
             <p>&copy; 2024 Climm Forros PVC. Todos os direitos reservados.</p>
+            <div class="rodape-bottom-links">
+              <a href="#">Política de Privacidade</a>
+              <a href="#">Termos</a>
+            </div>
           </div>
         </div>
       </section>
     </div>
+
+    <!-- Botão Scroll to Top -->
+    <button id="scroll-to-top" class="scroll-to-top">
+      <i class="fa fa-chevron-up"></i>
+    </button>
   </body>
 </html>
