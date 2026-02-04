@@ -27,6 +27,7 @@
     rgba(200, 225, 245, 0.5) 80%,
     rgba(189, 215, 240, 0.55) 100%
   );
+}
 
 /* =============================== */
 
@@ -38,10 +39,18 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--text);
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
 }
 
-body,
-html {
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: var(--text);
   width: 100%;
@@ -68,45 +77,127 @@ ANIMAÇÕES MINIMALISTAS
   }
 }
 
-@keyframes scaleIn {
-  from {
+@keyframes slideInFromLeft {
+  0% {
     opacity: 0;
-    transform: scale(0.95);
+    transform: translateX(-100px);
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
+  100% {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
-@keyframes slideInRight {
-  from {
+@keyframes slideInTextFromRight {
+  0% {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateX(100px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
-@keyframes pulseButton {
+@keyframes fadeInUpText {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
   0%, 100% {
-    opacity: 1;
+    box-shadow: 
+      0 0 20px rgba(93, 165, 228, 0.5),
+      0 4px 15px rgba(45, 82, 115, 0.4),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
   }
   50% {
-    opacity: 0.7;
+    box-shadow: 
+      0 0 35px rgba(93, 165, 228, 0.8),
+      0 6px 25px rgba(45, 82, 115, 0.6),
+      inset 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes shineEffect {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* =============================== 
+SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
+=============================== */
+
+/* Barra de progresso integrada ao navbar */
+.scroll-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-200));
+  transform-origin: left;
+  transform: scaleX(0);
+  border-radius: 0 0 50px 50px;
+  z-index: 1000;
+}
+
+/* Suporte para navegadores modernos com scroll-driven animations */
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scrollProgress linear;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes scrollProgress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* Parallax suave para elementos de fundo */
+  .corner-element {
+    animation: scrollParallax linear both;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes scrollParallax {
+    0% {
+      transform: rotate(45deg) translateY(0);
+    }
+    100% {
+      transform: rotate(45deg) translateY(-150px);
+    }
+  }
+
+  .corner-bottom-right {
+    animation-name: scrollParallaxReverse;
+  }
+
+  @keyframes scrollParallaxReverse {
+    0% {
+      transform: rotate(45deg) scaleX(-1) translateY(0);
+    }
+    100% {
+      transform: rotate(45deg) scaleX(-1) translateY(-150px);
+    }
+  }
+}
+
+/* Fallback para navegadores sem suporte a scroll-driven animations */
+@supports not (animation-timeline: scroll()) {
+  .scroll-progress {
+    /* Será controlado via JavaScript */
+    display: block;
   }
 }
 
@@ -255,63 +346,211 @@ ANIMAÇÕES MINIMALISTAS
   color: var(--bg-200);
   justify-content: center;
   align-items: center;
+  display: flex;
+  overflow: hidden;
 }
 
-#home h4 {
-  color: var(--text);
-  text-align: center;
-  font-size: 3em;
-  font-weight: lighter;
-  transition: 1s;
-  animation-name: textAnimate2;
-  animation-duration: 3s;
+.home-corner-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
 
-  animation-timing-function: ease-in-out;
+.corner-element {
+  position: absolute;
+  opacity: 0.15;
+  object-fit: contain;
 }
-#home h4 span {
-  color: var(--primary);
+
+.corner-top-left {
+  top: -100px;
+  left: -150px;
+  width: 600px;
+  height: 600px;
+  transform: rotate(45deg);
 }
-#home h3 {
-  color: var(--text);
-  text-align: center;
-  font-size: 3.2em;
+
+.corner-bottom-right {
+  bottom: -100px;
+  right: -150px;
+  width: 600px;
+  height: 600px;
+  transform: rotate(45deg) scaleX(-1);
+}
+
+.home-container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  position: relative;
+  z-index: 2;
+}
+
+.home-image-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideInFromLeft 1s ease-out;
+}
+
+.home-image {
+  max-width: 700px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+  animation: slideInFromLeft 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.home-video {
+  max-width: 700px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 16px;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
+  animation: slideInFromLeft 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.home-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.2em;
+  text-align: left;
+}
+
+.home-main-text {
+  font-size: 3.5em;
   font-weight: 300;
-  margin-right: 2em;
-  transition: 2s;
-  animation-name: textAnimate;
-  animation-duration: 3s;
-
-  animation-timing-function: ease-in-out;
+  color: var(--text);
+  line-height: 1.2;
+  animation: slideInFromLeft 0.8s ease-out 0.2s both;
+  margin: 0;
+  padding: 0;
 }
-#home h3 span {
-  font-size: 1.1em;
-  font-weight: 500;
+
+.home-main-text span {
   color: var(--primary);
-  font-style: normal;
+  font-weight: 600;
+  display: inline;
 }
 
-/* ======
-animação da home
-====== */
+.home-sub-text {
+  font-size: 2.2em;
+  font-weight: 400;
+  color: var(--text);
+  animation: slideInFromLeft 0.8s ease-out 0.4s both;
+  margin: 0;
+  padding: 0;
+}
 
-@keyframes textAnimate {
-  0% {
-    margin-right: 5.4em;
+.home-sub-text span {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.home-description {
+  font-size: 1.1em;
+  color: var(--bg-300);
+  animation: slideInFromLeft 0.8s ease-out 0.6s both;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+}
+
+/* HOME - RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .home-container {
+    gap: 2.5em;
   }
-  50% {
-    margin-right: 1.5em;
+
+  .home-image-wrapper {
+    flex: 0 0 250px;
   }
-  100% {
+
+  .home-image,
+  .home-video {
+    max-width: 250px;
+  }
+
+  .home-main-text {
+    font-size: 2.8em;
+  }
+
+  .home-sub-text {
+    font-size: 1.8em;
   }
 }
-@keyframes textAnimate2 {
-  0% {
-    margin-left: 5.4em;
+
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column-reverse;
+    gap: 2em;
+    padding: 1.5em;
   }
-  50% {
-    margin-left: 1.5em;
+
+  .home-image-wrapper {
+    flex: 0 0 auto;
+    width: 100%;
+    animation: slideInFromLeft 1s ease-out;
   }
-  100% {
+
+  .home-image,
+  .home-video {
+    max-width: 280px;
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .home-content {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .home-main-text {
+    font-size: 2.2em;
+  }
+
+  .home-sub-text {
+    font-size: 1.5em;
+  }
+
+  .home-description {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 1em;
+  }
+
+  .home-image,
+  .home-video {
+    max-width: 220px;
+  }
+
+  .home-main-text {
+    font-size: 1.8em;
+  }
+
+  .home-sub-text {
+    font-size: 1.2em;
+  }
+
+  .home-description {
+    font-size: 0.9em;
   }
 }
 
@@ -483,14 +722,38 @@ SOBRE - NOVO DESIGN
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, #1e3a52 100%);
+  background: linear-gradient(135deg, #3b7dd9 0%, #2d5273 50%, #1e3a52 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(45, 82, 115, 0.4);
+  box-shadow: 
+    0 0 20px rgba(93, 165, 228, 0.5),
+    0 4px 15px rgba(45, 82, 115, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  animation: glowPulse 3s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shineEffect 4s ease-in-out infinite;
+}
+
+.btn-primary:hover::before {
+  animation: shineEffect 0.6s ease-in-out !important;
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(45, 82, 115, 0.6);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 0 35px rgba(93, 165, 228, 0.8),
+    0 6px 25px rgba(45, 82, 115, 0.6),
+    inset 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 .btn-secondary {
@@ -727,29 +990,9 @@ a {
 
 /* ///////////////////////// */
 
-@keyframes textAnimateColor {
-  0%,
-  100% {
-    color: var(--text);
-  }
-  50% {
-    color: var(--primary);
-  }
-}
-
 /* =============================== 
-LOGO ANIMADO COM BOLA
+LOGO ANIMADO
 =============================== */
-
-.logo-container {
-  position: relative;
-  width: 250px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
 
 .animated-logo {
   font-size: 100px;
@@ -1194,89 +1437,87 @@ rodapé
 
 /*----------------------*/
 
-.ball.animate {
-  animation: bounce 2s forwards; /* A animação dura 3 segundos com uma curva de timing customizada */
-}
-.ball {
-  width: 25px;
-  height: 25px;
-  background-color: var(--primary);
-  border-radius: 50%;
-  position: absolute;
-  transition: 0.2s;
-}
-@keyframes bounce {
-  0% {
-    right: 100px;
-    bottom: -1180px;
-  }
-  10% {
-    bottom: -1080px;
-  }
-  20% {
-    bottom: -1180px;
-  }
-  30% {
-    bottom: -1080px;
-  }
-  40% {
-    bottom: -1180px;
-  }
-  50% {
-    bottom: -1080px;
-  }
-  60% {
-    bottom: -1180px;
-  }
-  70% {
-    bottom: -1080px;
-  }
-  80% {
-    bottom: -1180px;
-  }
-  90% {
-    bottom: -1140px;
-  }
-  100% {
-    right: 45px;
-    bottom: -1180px;
-  }
-}
-
 /* =============================== 
-SCROLL-TO-TOP BUTTON
+SCROLL-TO-TOP BUTTON - GLASSMORPHISM STYLE
 =============================== */
 
 .scroll-to-top {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 50px;
-  height: 50px;
-  background-color: var(--primary);
-  color: var(--branco);
-  border: none;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--primary);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 998;
-  transition: all 0.3s ease-in-out;
-  will-change: transform, opacity;
-  box-shadow: 0 4px 12px rgba(45, 82, 115, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity, box-shadow;
+  box-shadow: 
+    0 8px 32px rgba(45, 82, 115, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(45, 82, 115, 0.1),
+    0 0 0 1px rgba(45, 82, 115, 0.08);
+}
+
+.scroll-to-top::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 1px solid rgba(45, 82, 115, 0.15);
+  pointer-events: none;
+}
+
+.scroll-to-top i {
+  transition: transform 0.3s ease;
 }
 
 .scroll-to-top:hover {
-  background-color: var(--primary-200);
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(45, 82, 115, 0.4);
+  background: linear-gradient(145deg, rgba(45, 82, 115, 0.15), rgba(45, 82, 115, 0.05));
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 12px 40px rgba(45, 82, 115, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(45, 82, 115, 0.15),
+    0 0 0 1px rgba(45, 82, 115, 0.12);
+  border-color: rgba(45, 82, 115, 0.2);
+}
+
+.scroll-to-top:hover i {
+  transform: translateY(-2px);
+}
+
+.scroll-to-top:active {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 6px 20px rgba(45, 82, 115, 0.2),
+    inset 0 2px 4px rgba(45, 82, 115, 0.1),
+    0 0 0 1px rgba(45, 82, 115, 0.15);
 }
 
 .scroll-to-top.show {
   display: flex;
-  animation: fadeInUp 0.4s ease-in-out;
+  animation: scrollBtnAppear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scrollBtnAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* =============================== 
@@ -1380,9 +1621,9 @@ CARD ANIMATIONS & COUNTER BADGE
   .scroll-to-top {
     bottom: 20px;
     right: 20px;
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
   }
 
   #home {
@@ -1393,8 +1634,9 @@ CARD ANIMATIONS & COUNTER BADGE
     align-items: center;
     text-align: center;
   }
-  #home h4,
-  #home h3 {
+  
+  .home-main-text,
+  .home-sub-text {
     margin-top: -2em;
     text-align: center;
     font-size: 1.2em;
@@ -1402,45 +1644,9 @@ CARD ANIMATIONS & COUNTER BADGE
     margin: 0;
     word-wrap: break-word;
   }
-  #home h3 {
-    animation-name: textAnimate3Mobile;
-    transition: 1s;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-  }
-  #home h4 {
-    animation-name: textAnimate2Mobile;
-    transition: 0.2s;
-    animation-duration: 2s;
-  }
 
-  #home h3 span {
+  .home-main-text span {
     font-size: 1.3em;
-  }
-  @keyframes textAnimate2Mobile {
-    0% {
-      margin-top: 10em;
-      color: #00000000;
-    }
-    50% {
-      margin-top: 1em;
-    }
-    100% {
-      margin: 0;
-    }
-  }
-  @keyframes textAnimate3Mobile {
-    0% {
-      font-size: 0px;
-      color: #00000000;
-    }
-    50% {
-      color: var(--primary-200);
-    }
-    100% {
-      font-size: 1.3em;
-      color: var(--primary);
-    }
   }
 
   #sobre {
@@ -1647,8 +1853,8 @@ CARD ANIMATIONS & COUNTER BADGE
     font-size: 16px;
   }
 
-  #home h3,
-  #home h4 {
+  .home-main-text,
+  .home-sub-text {
     font-size: 2em;
   }
 

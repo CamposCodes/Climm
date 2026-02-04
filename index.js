@@ -1,5 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
   // ========================================
+  // AUTOPLAY VIDEO FIX
+  // ========================================
+  const heroVideo = document.querySelector(".home-video");
+  if (heroVideo) {
+    heroVideo.play().catch(function(error) {
+      console.log("Autoplay bloqueado, tentando novamente...");
+      // Se autoplay falhar, tenta novamente após interação
+      document.addEventListener("click", function() {
+        heroVideo.play();
+      }, { once: true });
+    });
+  }
+
+  // ========================================
   // DESTAQUE DE SEÇÃO ATIVA NA NAVEGAÇÃO
   // ========================================
   const navLinks = document.querySelectorAll("#navegacao a");
@@ -131,50 +145,39 @@ document.addEventListener("DOMContentLoaded", function () {
   // ========================================
   const scrollToTopBtn = document.getElementById("scroll-to-top");
 
-  window.addEventListener("scroll", function () {
-    if (window.pageYOffset > 300) {
-      scrollToTopBtn.classList.add("show");
-    } else {
-      scrollToTopBtn.classList.remove("show");
-    }
-  });
-
-  scrollToTopBtn.addEventListener("click", function () {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
-
-  // ========================================
-  // ANIMAÇÃO BOLA CONTATO (jQuery)
-  // ========================================
-  $(document).ready(function () {
-    // Função para verificar se a seção #contato está visível no viewport
-    function isContactSectionVisible() {
-      var windowHeight = $(window).height();
-      var contactSectionTop = $("#contato").offset().top;
-      var contactSectionBottom = contactSectionTop + $("#contato").outerHeight();
-      var viewportTop = $(window).scrollTop();
-      var viewportBottom = viewportTop + windowHeight;
-
-      return (
-        contactSectionBottom > viewportTop && contactSectionTop < viewportBottom
-      );
-    }
-
-    // Verifica a visibilidade da seção #contato quando a página é carregada
-    if (isContactSectionVisible()) {
-      $(".ball").addClass("animate");
-    }
-
-    // Verifica a visibilidade da seção #contato ao rolar a página
-    $(window).scroll(function () {
-      if (isContactSectionVisible()) {
-        $(".ball").addClass("animate");
+  if (scrollToTopBtn) {
+    window.addEventListener("scroll", function () {
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add("show");
+      } else {
+        scrollToTopBtn.classList.remove("show");
       }
+    }, { passive: true });
+
+    scrollToTopBtn.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     });
-  });
+  }
+
+  // ========================================
+  // BARRA DE PROGRESSO (Fallback JS)
+  // ========================================
+  const scrollProgress = document.querySelector(".scroll-progress");
+  
+  // Verifica se o navegador NÃO suporta scroll-driven animations
+  if (scrollProgress && !CSS.supports('animation-timeline', 'scroll()')) {
+    scrollProgress.style.display = 'block';
+    
+    window.addEventListener("scroll", function () {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = scrollTop / scrollHeight;
+      scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+    }, { passive: true });
+  }
 });
 
 // ========================================
