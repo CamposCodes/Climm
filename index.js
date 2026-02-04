@@ -2,13 +2,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // ========================================
   // VIDEO PLAYER ROBUSTO - COMPATIBILIDADE TOTAL
   // ========================================
-  const heroVideo = document.getElementById("hero-video");
-  const videoContainer = document.getElementById("video-container");
-  const fallbackImage = document.querySelector(".home-fallback");
-  let videoAttempts = 0;
-  const MAX_ATTEMPTS = 10;
   
-  if (heroVideo && videoContainer) {
+  // Função auxiliar para inicializar video
+  function setupVideo(videoId) {
+    const heroVideo = document.getElementById(videoId);
+    const fallbackImage = heroVideo ? heroVideo.parentElement.querySelector(".home-fallback") : null;
+    let videoAttempts = 0;
+    const MAX_ATTEMPTS = 10;
+    
+    if (!heroVideo) return;
+    
     // ETAPA 1: Configuração Essencial
     heroVideo.muted = true;
     heroVideo.defaultMuted = true;
@@ -16,8 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     heroVideo.controls = false;
     
     // Força visibilidade do vídeo
-    videoContainer.style.display = 'block';
-    videoContainer.style.visibility = 'visible';
     heroVideo.style.display = 'block';
     heroVideo.style.visibility = 'visible';
     if (fallbackImage) {
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
       fallbackImage.style.visibility = 'hidden';
     }
     
-    console.log("[Video] Sistema iniciado");
+    console.log("[Video] Sistema iniciado - " + videoId);
     
     // ETAPA 2: Função de Reprodução
     function playVideo() {
@@ -71,8 +72,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // ETAPA 3: Fallback
     function showFallback() {
       console.log("[Video] Ativando fallback de imagem");
-      videoContainer.style.display = 'none';
-      videoContainer.style.visibility = 'hidden';
+      heroVideo.style.display = 'none';
+      heroVideo.style.visibility = 'hidden';
       if (fallbackImage) {
         fallbackImage.style.display = 'block';
         fallbackImage.style.visibility = 'visible';
@@ -112,6 +113,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, 5000);
   }
+  
+  // Inicializar ambos os vídeos
+  setupVideo("hero-video");
+  setupVideo("hero-video-mobile");
 
   // ========================================
   // DESTAQUE DE SEÇÃO ATIVA NA NAVEGAÇÃO

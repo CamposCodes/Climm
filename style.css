@@ -308,7 +308,7 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   position: relative;
   padding: 0;
   margin: 0;
-  padding-top: 5.5em;
+  padding-top: 0.5em;
   box-sizing: border-box;
 }
 
@@ -345,13 +345,51 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 .home-container {
   width: 100%;
   max-width: 1400px;
-  padding: 2em;
   display: flex;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== VERSÃO DESKTOP ===== */
+.home-desktop {
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 2em;
-  position: relative;
-  z-index: 2;
+}
+
+/* ===== VERSÃO MOBILE ===== */
+.home-mobile {
+  display: none !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center;
+  gap: 0.5em;
+}
+
+.home-video-section {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  order: 1;
+}
+
+.home-title-section {
+  width: 100%;
+  order: 2;
+}
+
+.home-subtitle-section {
+  width: 100%;
+  order: 3;
+}
+
+.home-description-section {
+  width: 100%;
+  order: 4;
 }
 
 .home-image-wrapper {
@@ -480,29 +518,53 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 }
 
 @media (max-width: 768px) {
-  .home-container {
-    flex-direction: column;
-    gap: 2em;
-    padding: 1.5em;
+  body {
+    padding-top: 3.5em;
   }
 
-  .home-image-wrapper {
-    order: -1;
-    flex: 0 0 auto;
+  .home-desktop {
+    display: none !important;
+  }
+
+  .home-mobile {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
     width: 100%;
-    margin: 0 auto;
+    padding: 1.5em;
+    gap: 1.5em;
   }
 
-  .home-content {
-    align-items: center;
-    text-align: center;
+  .home-video-section {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    order: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .home-title-section {
+    order: 2 !important;
+    width: 100%;
+  }
+
+  .home-subtitle-section {
+    order: 3 !important;
+    width: 100%;
+  }
+
+  .home-description-section {
+    order: 4 !important;
     width: 100%;
   }
 
   .home-image,
   .home-video,
   .home-fallback {
-    max-width: 220px;
+    max-width: 280px;
     width: 100%;
     border-radius: 12px;
     margin: 0 auto;
@@ -522,14 +584,48 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 }
 
 @media (max-width: 480px) {
-  .home-container {
-    flex-direction: column;
+  .home-desktop {
+    display: none !important;
+  }
+
+  .home-mobile {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100%;
     padding: 1em;
+    gap: 1.5em;
+  }
+
+  .home-video-section {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    order: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .home-title-section {
+    order: 2 !important;
+    width: 100%;
+  }
+
+  .home-subtitle-section {
+    order: 3 !important;
+    width: 100%;
+  }
+
+  .home-description-section {
+    order: 4 !important;
+    width: 100%;
   }
 
   .home-image,
   .home-video {
-    max-width: 220px;
+    max-width: 250px;
   }
 
   .home-main-text {
@@ -1625,7 +1721,7 @@ CARD ANIMATIONS & COUNTER BADGE
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 8em;
+    border: none;
   }
 
   .home-container {
