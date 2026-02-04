@@ -308,8 +308,8 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   position: relative;
   padding: 0;
   margin: 0;
-  padding-top: 0.5em;
-  box-sizing: border-box;
+  padding-top: 2em;
+  scroll-margin-top: 5.5em;
 }
 
 #home {
@@ -522,6 +522,12 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
     padding-top: 3.5em;
   }
 
+  #produtos,
+  #contato,
+  #sobre {
+    scroll-margin-top: 3.5em;
+  }
+
   .home-desktop {
     display: none !important;
   }
@@ -538,7 +544,7 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 
   .home-video-section {
     width: 100%;
-    max-width: 280px;
+    max-width: 100%;
     margin: 0 auto;
     order: 1 !important;
     display: flex !important;
@@ -564,7 +570,7 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   .home-image,
   .home-video,
   .home-fallback {
-    max-width: 280px;
+    max-width: 350px;
     width: 100%;
     border-radius: 12px;
     margin: 0 auto;
@@ -584,6 +590,16 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 }
 
 @media (max-width: 480px) {
+  body {
+    padding-top: 3em;
+  }
+
+  #produtos,
+  #contato,
+  #sobre {
+    scroll-margin-top: 3em;
+  }
+
   .home-desktop {
     display: none !important;
   }
@@ -600,7 +616,7 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 
   .home-video-section {
     width: 100%;
-    max-width: 250px;
+    max-width: 100%;
     margin: 0 auto;
     order: 1 !important;
     display: flex !important;
@@ -625,7 +641,7 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 
   .home-image,
   .home-video {
-    max-width: 250px;
+    max-width: 320px;
   }
 
   .home-main-text {
@@ -1776,8 +1792,7 @@ CARD ANIMATIONS & COUNTER BADGE
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 0;
-    padding: 0;
+    padding-top: 3em;
   }
 
   .sobre-header h1 {
