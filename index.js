@@ -2,15 +2,45 @@ document.addEventListener("DOMContentLoaded", function () {
   // ========================================
   // AUTOPLAY VIDEO FIX
   // ========================================
-  const heroVideo = document.querySelector(".home-video");
+  const heroVideo = document.getElementById("hero-video");
   if (heroVideo) {
-    heroVideo.play().catch(function(error) {
-      console.log("Autoplay bloqueado, tentando novamente...");
-      // Se autoplay falhar, tenta novamente após interação
-      document.addEventListener("click", function() {
-        heroVideo.play();
-      }, { once: true });
-    });
+    // Garantir que o vídeo está mudo (necessário para autoplay)
+    heroVideo.muted = true;
+    heroVideo.defaultMuted = true;
+    
+    // Função para tentar reproduzir o vídeo
+    function playVideo() {
+      const playPromise = heroVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.then(function() {
+          console.log("Vídeo iniciado com sucesso");
+        }).catch(function(error) {
+          console.log("Autoplay bloqueado:", error);
+        });
+      }
+    }
+    
+    // Tentar reproduzir quando o vídeo estiver pronto
+    if (heroVideo.readyState >= 2) {
+      playVideo();
+    } else {
+      heroVideo.addEventListener("loadeddata", playVideo);
+      heroVideo.addEventListener("canplay", playVideo);
+    }
+    
+    // Fallback: tentar novamente após um pequeno delay
+    setTimeout(playVideo, 500);
+    
+    // Observer para quando o vídeo entrar na viewport
+    const videoObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          playVideo();
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    videoObserver.observe(heroVideo);
   }
 
   // ========================================
