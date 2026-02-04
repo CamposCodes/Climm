@@ -141,14 +141,14 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 /* Barra de progresso integrada ao navbar */
 .scroll-progress {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: calc(100% - 24px);
   height: 3px;
   background: linear-gradient(90deg, var(--primary), var(--primary-200));
-  transform-origin: left;
-  transform: scaleX(0);
-  border-radius: 0 0 50px 50px;
+  transform-origin: left center;
+  border-radius: 3px;
   z-index: 1000;
 }
 
@@ -160,8 +160,8 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   }
 
   @keyframes scrollProgress {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
+    from { transform: translateX(-50%) scaleX(0); }
+    to { transform: translateX(-50%) scaleX(1); }
   }
 
   /* Parallax suave para elementos de fundo */

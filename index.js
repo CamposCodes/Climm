@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrollPercent = scrollTop / scrollHeight;
-      scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+      scrollProgress.style.transform = `translateX(-50%) scaleX(${scrollPercent})`;
     }, { passive: true });
   }
 });
