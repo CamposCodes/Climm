@@ -351,6 +351,16 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   animation: slideInFromLeft 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.video-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideInFromLeft 1s ease-out;
+  width: 100%;
+  height: auto;
+}
+
 .home-video {
   max-width: 700px;
   width: 100%;
@@ -359,6 +369,20 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   border-radius: 16px;
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
   animation: slideInFromLeft 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: block;
+}
+
+.home-image {
+  max-width: 700px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+  animation: slideInFromLeft 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.home-fallback {
+  display: none !important;
 }
 
 .home-content {
@@ -447,8 +471,9 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   }
 
   .home-image,
-  .home-video {
-    max-width: 280px;
+  .home-video,
+  .home-fallback {
+    max-width: 220px;
     width: 100%;
     border-radius: 12px;
   }
@@ -1589,8 +1614,10 @@ CARD ANIMATIONS & COUNTER BADGE
     flex: none;
   }
 
-  .home-video {
-    max-width: 280px;
+  .home-video,
+  .home-image,
+  .home-fallback {
+    max-width: 200px;
     width: 100%;
     border-radius: 12px;
   }

@@ -1,47 +1,146 @@
 document.addEventListener("DOMContentLoaded", function () {
   // ========================================
-  // AUTOPLAY VIDEO FIX
+  // VIDEO PLAYER ROBUSTO COM FALLBACK
   // ========================================
   const heroVideo = document.getElementById("hero-video");
-  if (heroVideo) {
-    // Garantir que o vídeo está mudo (necessário para autoplay)
+  const videoContainer = document.getElementById("video-container");
+  const fallbackImage = document.querySelector(".home-fallback");
+  let videoInitialized = false;
+  let videoPlayedOnce = false;
+  
+  if (heroVideo && videoContainer) {
+    // Configurar atributos essenciais do vídeo
     heroVideo.muted = true;
     heroVideo.defaultMuted = true;
+    heroVideo.volume = 0;
+    heroVideo.controls = false;
     
-    // Função para tentar reproduzir o vídeo
-    function playVideo() {
+    // Força o vídeo a ficar visível por padrão
+    videoContainer.style.display = 'block';
+    if (fallbackImage) fallbackImage.style.display = 'none';
+    
+    /**
+     * Função para tentar reproduzir o vídeo
+     * Tenta múltiplas vezes com diferentes estratégias
+     */
+    function attemptVideoPlay() {
+      if (videoPlayedOnce) return;
+      
+      // Se o vídeo não está carregado, retornar
+      if (heroVideo.readyState < 2) {
+        console.log("[Video] Aguardando carregamento...");
+        return;
+      }
+      
+      // Tentar reproduzir
       const playPromise = heroVideo.play();
+      
       if (playPromise !== undefined) {
-        playPromise.then(function() {
-          console.log("Vídeo iniciado com sucesso");
-        }).catch(function(error) {
-          console.log("Autoplay bloqueado:", error);
-        });
+        playPromise
+          .then(function() {
+            videoPlayedOnce = true;
+            videoInitialized = true;
+            console.log("✓ [Video] Reprodução iniciada com sucesso");
+            // Garantir que vídeo está visível
+            videoContainer.style.display = 'block';
+            if (fallbackImage) fallbackImage.style.display = 'none';
+          })
+          .catch(function(error) {
+            console.warn("⚠ [Video] Autoplay bloqueado:", error.name);
+            // Se não conseguir reproduzir após 5 tentativas, mostrar fallback
+            if (!videoPlayedOnce) {
+              showFallback();
+            }
+          });
+      } else {
+        // Navegador não suporta Promise
+        console.log("[Video] Navegador antigo, usando fallback");
+        showFallback();
       }
     }
     
-    // Tentar reproduzir quando o vídeo estiver pronto
-    if (heroVideo.readyState >= 2) {
-      playVideo();
-    } else {
-      heroVideo.addEventListener("loadeddata", playVideo);
-      heroVideo.addEventListener("canplay", playVideo);
+    /**
+     * Mostrar imagem de fallback
+     */
+    function showFallback() {
+      console.log("✓ [Video] Mostrando imagem de fallback");
+      videoContainer.style.display = 'none';
+      if (fallbackImage) fallbackImage.style.display = 'block';
+      videoPlayedOnce = true;
     }
     
-    // Fallback: tentar novamente após um pequeno delay
-    setTimeout(playVideo, 500);
+    /**
+     * Listeners para eventos de carregamento
+     */
+    heroVideo.addEventListener("loadstart", function() {
+      console.log("[Video] Iniciando carregamento...");
+    });
     
-    // Observer para quando o vídeo entrar na viewport
-    const videoObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          playVideo();
-        }
-      });
-    }, { threshold: 0.1 });
+    heroVideo.addEventListener("loadedmetadata", function() {
+      console.log("[Video] Metadados carregados");
+      attemptVideoPlay();
+    });
     
-    videoObserver.observe(heroVideo);
+    heroVideo.addEventListener("canplay", function() {
+      console.log("[Video] Pode reproduzir");
+      if (!videoPlayedOnce) attemptVideoPlay();
+    });
+    
+    heroVideo.addEventListener("canplaythrough", function() {
+      console.log("[Video] Pode reproduzir sem pausa");
+      if (!videoPlayedOnce) attemptVideoPlay();
+    });
+    
+    /**
+     * Listener para erro
+     */
+    heroVideo.addEventListener("error", function(e) {
+      console.error("✗ [Video] Erro ao carregar vídeo:", e.target.error);
+      showFallback();
+    });
+    
+    /**
+     * Listener para quando vídeo é pausado (indica que autoplay foi bloqueado)
+     */
+    heroVideo.addEventListener("pause", function() {
+      if (!videoPlayedOnce && heroVideo.readyState >= 2) {
+        console.log("[Video] Vídeo pausado automaticamente (autoplay bloqueado)");
+        // Aguardar um pouco e mostrar fallback
+        setTimeout(showFallback, 1000);
+      }
+    });
+    
+    /**
+     * Estratégia agressiva: tentar reproduzir repetidamente
+     */
+    const playAttempts = [100, 300, 800, 1500, 2500, 4000];
+    playAttempts.forEach((delay) => {
+      setTimeout(attemptVideoPlay, delay);
+    });
+    
+    /**
+     * Fallback final: se nada funcionar, mostrar imagem após 5 segundos
+     */
+    setTimeout(function() {
+      if (!videoPlayedOnce) {
+        console.log("✓ [Video] Timeout - mostrando fallback");
+        showFallback();
+      }
+    }, 5000);
+    
+    /**
+     * Permitir ao usuário clicar no vídeo para reproduzir manualmente
+     */
+    heroVideo.addEventListener("click", function(e) {
+      if (!videoPlayedOnce) {
+        attemptVideoPlay();
+      }
+    });
   }
+
+  // ========================================
+  // DESTAQUE DE SEÇÃO ATIVA NA NAVEGAÇÃO
+  // ========================================
 
   // ========================================
   // DESTAQUE DE SEÇÃO ATIVA NA NAVEGAÇÃO
