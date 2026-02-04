@@ -313,13 +313,33 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 }
 
 #home {
-  background: var(--gradient);
+  background: #DBDDE1;
   background-attachment: fixed;
   color: var(--bg-200);
   justify-content: center;
   align-items: center;
   display: flex;
   overflow: hidden;
+  position: relative;
+}
+
+/* Gradiente suave azul nos cantos */
+#home::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 800px at 0% 0%, rgba(189, 223, 255, 0.25) 0%, transparent 50%),
+    radial-gradient(circle 600px at 100% 100%, rgba(160, 200, 240, 0.2) 0%, transparent 50%),
+    radial-gradient(circle 500px at 10% 90%, rgba(180, 210, 245, 0.15) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Garantir que conteudo fica acima do gradiente */
+#home > * {
+  position: relative;
+  z-index: 1;
 }
 
 .home-container {
@@ -367,9 +387,10 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   height: auto;
   object-fit: contain;
   border-radius: 16px;
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
   animation: slideInFromLeft 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  display: block;
+  display: block !important;
+  background-color: #f5f7fa;
+  visibility: visible !important;
 }
 
 .home-image {
