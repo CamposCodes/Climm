@@ -481,7 +481,7 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 
 @media (max-width: 768px) {
   .home-container {
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 2em;
     padding: 1.5em;
   }
