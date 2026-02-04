@@ -487,7 +487,15 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   }
 
   .home-image-wrapper {
+    order: -1;
     flex: 0 0 auto;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .home-content {
+    align-items: center;
+    text-align: center;
     width: 100%;
   }
 
@@ -497,12 +505,7 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
     max-width: 220px;
     width: 100%;
     border-radius: 12px;
-  }
-
-  .home-content {
-    align-items: center;
-    text-align: center;
-    width: 100%;
+    margin: 0 auto;
   }
 
   .home-main-text {
@@ -520,6 +523,7 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
 
 @media (max-width: 480px) {
   .home-container {
+    flex-direction: column;
     padding: 1em;
   }
 
