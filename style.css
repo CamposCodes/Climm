@@ -163,34 +163,6 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
     from { transform: translateX(-50%) scaleX(0); }
     to { transform: translateX(-50%) scaleX(1); }
   }
-
-  /* Parallax suave para elementos de fundo */
-  .corner-element {
-    animation: scrollParallax linear both;
-    animation-timeline: scroll(root);
-  }
-
-  @keyframes scrollParallax {
-    0% {
-      transform: rotate(45deg) translateY(0);
-    }
-    100% {
-      transform: rotate(45deg) translateY(-150px);
-    }
-  }
-
-  .corner-bottom-right {
-    animation-name: scrollParallaxReverse;
-  }
-
-  @keyframes scrollParallaxReverse {
-    0% {
-      transform: rotate(45deg) scaleX(-1) translateY(0);
-    }
-    100% {
-      transform: rotate(45deg) scaleX(-1) translateY(-150px);
-    }
-  }
 }
 
 /* Fallback para navegadores sem suporte a scroll-driven animations */
@@ -350,36 +322,6 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   overflow: hidden;
 }
 
-.home-corner-elements {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.corner-element {
-  position: absolute;
-  opacity: 0.15;
-  object-fit: contain;
-}
-
-.corner-top-left {
-  top: -100px;
-  left: -150px;
-  width: 600px;
-  height: 600px;
-  transform: rotate(45deg);
-}
-
-.corner-bottom-right {
-  bottom: -100px;
-  right: -150px;
-  width: 600px;
-  height: 600px;
-  transform: rotate(45deg) scaleX(-1);
-}
-
 .home-container {
   width: 100%;
   max-width: 1400px;
@@ -502,7 +444,6 @@ SCROLL-DRIVEN ANIMATIONS (CSS Moderno)
   .home-image-wrapper {
     flex: 0 0 auto;
     width: 100%;
-    animation: slideInFromLeft 1s ease-out;
   }
 
   .home-image,
@@ -1628,25 +1569,56 @@ CARD ANIMATIONS & COUNTER BADGE
 
   #home {
     width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 8em;
+  }
+
+  .home-container {
+    flex-direction: column-reverse;
+    gap: 1.5em;
+    padding: 1em;
+  }
+
+  .home-image-wrapper {
+    width: 100%;
+    flex: none;
+  }
+
+  .home-video {
+    max-width: 280px;
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .home-content {
+    width: 100%;
     align-items: center;
     text-align: center;
   }
   
   .home-main-text,
   .home-sub-text {
-    margin-top: -2em;
     text-align: center;
-    font-size: 1.2em;
-    align-items: center;
+    font-size: 1.6em;
     margin: 0;
     word-wrap: break-word;
   }
 
   .home-main-text span {
+    font-size: 1em;
+  }
+
+  .home-sub-text {
     font-size: 1.3em;
+  }
+
+  .home-description {
+    font-size: 0.95em;
   }
 
   #sobre {
