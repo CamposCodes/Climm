@@ -119,36 +119,136 @@ document.addEventListener("DOMContentLoaded", function () {
   setupVideo("hero-video-mobile");
 
   // ========================================
-  // DESTAQUE DE SEÇÃO ATIVA NA NAVEGAÇÃO
+  // SELETOR DE CORES DOS PRODUTOS
   // ========================================
+  
+  const colorOptions = document.querySelectorAll(".color-option");
+  
+  colorOptions.forEach(function(colorOption) {
+    colorOption.addEventListener("click", function() {
+      const card = this.closest(".product-card");
+      const productId = card.getAttribute("data-product-id");
+      const selectedColor = this.getAttribute("data-color");
+      
+      // Remover classe 'selected' de todas as cores do card
+      const allColorsInCard = card.querySelectorAll(".color-option");
+      allColorsInCard.forEach(function(color) {
+        color.classList.remove("selected");
+      });
+      
+      // Adicionar classe 'selected' à cor clicada
+      this.classList.add("selected");
+      
+      // Atualizar a imagem do produto
+      updateProductImage(card, selectedColor, productId);
+    });
+  });
+  
+  // Inicializar primeira cor como selecionada
+  colorOptions.forEach(function(colorOption) {
+    const card = colorOption.closest(".product-card");
+    if (card && colorOption.getAttribute("data-color") === "1") {
+      colorOption.classList.add("selected");
+    }
+  });
+  
+  // Função para atualizar a imagem do produto
+  function updateProductImage(card, colorNumber, productId) {
+    const image = card.querySelector(".product-image");
+    const imageWrapper = card.querySelector(".product-image-wrapper");
+    
+    if (image) {
+      // Mostrar loading
+      imageWrapper.classList.add("loading");
+      
+      // Mapear cores para imagens
+      const imageSrc = "./assets/produtos/" + colorNumber + ".png";
+      
+      // Criar uma nova imagem para pré-carregar
+      const preloadImg = new Image();
+      
+      preloadImg.onload = function() {
+        // Aguardar um pouco para garantir renderização
+        setTimeout(function() {
+          image.src = imageSrc;
+          image.style.transition = "opacity 0.4s ease";
+          
+          // Garantir que a imagem foi renderizada
+          requestAnimationFrame(function() {
+            imageWrapper.classList.remove("loading");
+          });
+        }, 300);
+      };
+      
+      preloadImg.onerror = function() {
+        image.src = imageSrc;
+        imageWrapper.classList.remove("loading");
+      };
+      
+      preloadImg.src = imageSrc;
+    }
+  }
+
+  // ========================================
+  // ADICIONAR AO CARRINHO / COMPLEMENTO
+  // ========================================
+  
+  window.adicionarAoCarrinho = function(button) {
+    const productTitle = button.closest(".product-card").querySelector(".product-title").textContent;
+    
+    // Se for botão de complemento
+    if (button.classList.contains("btn-add-complement")) {
+      button.classList.toggle("selected");
+      
+      if (button.classList.contains("selected")) {
+        // Mostrar texto de confirmação quando selecionado
+        button.innerHTML = 'Proteção Adicionada';
+        console.log("✓ " + productTitle + " adicionado como complemento");
+      } else {
+        // Restaurar o ícone e texto original
+        button.innerHTML = '<i class="fa fa-plus"></i> Adicionar Proteção';
+        console.log("✗ " + productTitle + " removido");
+      }
+    } else {
+      // Comportamento original para btn-add-cart
+      const card = button.closest(".product-card");
+      const originalText = button.textContent;
+      button.textContent = 'Interesse registrado!';
+      button.style.background = 'linear-gradient(135deg, #1e3a52 0%, #152a3e 100%)';
+      
+      console.log("✓ Interesse registrado: " + productTitle);
+      
+      setTimeout(function() {
+        button.textContent = originalText;
+        button.style.background = '';
+      }, 2000);
+    }
+  };
 
   // ========================================
   // DESTAQUE DE SEÇÃO ATIVA NA NAVEGAÇÃO
   // ========================================
+
   const navLinks = document.querySelectorAll("#navegacao a");
   const sections = document.querySelectorAll("section");
 
   function updateActiveNav() {
     let current = "";
-    const navbarHeight = 120; // altura do navbar
+    const navbarHeight = 120;
 
-    // Encontrar a seção mais próxima do topo da viewport
     sections.forEach((section) => {
       const sectionTop = section.getBoundingClientRect().top;
       const sectionBottom = section.getBoundingClientRect().bottom;
 
-      // Se a seção está visível na viewport
       if (sectionTop <= window.innerHeight / 2 && sectionBottom >= window.innerHeight / 2) {
         current = section.getAttribute("id");
       }
     });
 
-    // Remover classe ativa de todos os links
     navLinks.forEach((link) => {
       link.classList.remove("nav-active");
     });
 
-    // Adicionar classe ativa ao link da seção atual
     if (current !== "") {
       const activeLink = document.querySelector(`#navegacao a[href="#${current}"]`);
       if (activeLink) {
@@ -157,10 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Atualizar ao fazer scroll
   window.addEventListener("scroll", updateActiveNav, { passive: true });
-  
-  // Atualizar na carga da página
   updateActiveNav();
 
   // ========================================
@@ -196,27 +293,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ========================================
-  // SELETOR DE COR E ÍCONE
-  // ========================================
-  var cores = document.querySelectorAll(".color");
-  cores.forEach(function (cor) {
-    cor.addEventListener("click", function () {
-      selecionarCor(this, this.closest(".card").classList[1]);
-    });
-  });
-
-  // Inicializar cores selecionadas (op1) ao carregar a página
-  var coresIniciais = document.querySelectorAll(".color.cor_selected");
-  coresIniciais.forEach(function (cor) {
-    selecionarCor(cor, cor.closest(".card").classList[1]);
-  });
-
-  // ========================================
-  // FECHAR MENU HAMBURGER AO CLICAR EM LINK
-  // ========================================
-  // Menu hamburger foi removido - este código não é mais necessário
-
-  // ========================================
   // INTERSECTION OBSERVER PARA ANIMAÇÕES AO SCROLL
   // ========================================
   const observerOptions = {
@@ -229,7 +305,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (entry.isIntersecting) {
         entry.target.classList.add("animate");
 
-        // Se é um card de resultado, animar os contadores
         if (
           entry.target.classList.contains("resultado-card") &&
           !entry.target.dataset.animated
@@ -243,7 +318,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }, observerOptions);
 
-  // Observar elementos com classe scroll-animate
   const animatedElements = document.querySelectorAll(".scroll-animate");
   animatedElements.forEach((element) => {
     observer.observe(element);
@@ -276,7 +350,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // ========================================
   const scrollProgress = document.querySelector(".scroll-progress");
   
-  // Verifica se o navegador NÃO suporta scroll-driven animations
   if (scrollProgress && !CSS.supports('animation-timeline', 'scroll()')) {
     scrollProgress.style.display = 'block';
     
@@ -290,57 +363,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ========================================
-// FUNÇÕES UTILITÁRIAS
-// ========================================
-
-function selecionarCor(elemento, card) {
-  // Remove a classe 'cor_selected' de todas as cores do card
-  var coresDoCard = document.querySelectorAll("." + card + " .color");
-  coresDoCard.forEach(function (cor) {
-    cor.classList.remove("cor_selected");
-  });
-  // Adiciona a classe 'cor_selected' apenas na cor selecionada
-  elemento.classList.add("cor_selected");
-
-  // Altera o src da imagem com base na cor selecionada
-  var corSelecionada = elemento.id;
-  var img = document.querySelector("." + card + " img.img-product");
-  switch (corSelecionada) {
-    case "op1":
-      img.src = "./assets/produtos/1.png";
-      break;
-    case "op2":
-      img.src = "./assets/produtos/2.png";
-      break;
-    case "op3":
-      img.src = "./assets/produtos/3.png";
-      break;
-    case "op4":
-      img.src = "./assets/produtos/4.png";
-      break;
-    //++
-    default:
-      break;
-  }
-}
-
-function mudarIcone(elemento) {
-  var icone = elemento.querySelector("i");
-  if (icone.classList.contains("fa-check")) {
-    icone.classList.remove("fa-check");
-    icone.classList.add("fa-plus");
-    icone.style.color = "";
-    icone.style.padding = "0.7em 0.8em";
-  } else {
-    icone.classList.remove("fa-plus");
-    icone.classList.add("fa-check");
-    icone.style.color = "green";
-    icone.style.padding = "0.7em 0.7em";
-  }
-}
-
-// ========================================
-// ANIMAÇÃO DE CONTADORES (NÚMEROS SUBINDO)
+// FUNÇÃO PARA ANIMAÇÃO DE CONTADORES
 // ========================================
 
 function animateCounters(card) {
@@ -348,8 +371,8 @@ function animateCounters(card) {
 
   counterElements.forEach((element) => {
     const target = parseInt(element.dataset.target);
-    const duration = 2000; // 2 segundos
-    const steps = 60; // 60 frames
+    const duration = 2000;
+    const steps = 60;
     const increment = target / steps;
     let current = 0;
     let frameCount = 0;

@@ -243,108 +243,106 @@
       </section>
       <section id="produtos">
         <div id="area">
-          <h1>Nossos Produtos</h1>
-          <div class="card card1 scroll-animate" data-index="0">
-            <h3>PVC Frisado Climm</h3>
-            <img
-              class="img-product frisado"
-              width="300"
-              height="300"
-              src="./assets/produtos/1.png"
-              alt=""
-              style="border-radius: 0.2em"
-            />
-            <div class="info">
-              <p>
-                Forro em PVC com textura sutil e elegante, que adiciona
-                profundidade e interesse visual aos ambientes. Ideal para quem
-                busca uma estética decorativa e acolhedora, mantendo os padrões
-                de qualidade, durabilidade e praticidade característicos dos
-                produtos da Climm.
-              </p>
-              <span>cores:</span>
-              <div class="colors">
-                <div
-                  id="op1"
-                  class="color cor_selected"
-                  onclick="selecionarCor(this, 'card1')"
-                ></div>
-                <div
-                  id="op2"
-                  class="color"
-                  onclick="selecionarCor(this, 'card1')"
-                ></div>
-                <div
-                  id="op3"
-                  class="color"
-                  onclick="selecionarCor(this, 'card1')"
-                ></div>
-                <div
-                  id="op4"
-                  class="color"
-                  onclick="selecionarCor(this, 'card1')"
-                ></div>
+          <div class="produtos-wrapper">
+            <h1 class="produtos-title">Nossos Produtos</h1>
+            <p class="produtos-subtitle">Descubra nossa seleção curada para uma vida equilibrada e sustentável.</p>
+            
+            <div class="produtos-grid">
+              <!-- Produto 1: PVC Frisado Climm -->
+              <div class="product-card scroll-animate" data-index="0" data-product-id="frisado">
+                <div class="product-badge pedido">+ Pedido</div>
+                <div class="product-image-wrapper">
+                  <img
+                    class="product-image"
+                    src="./assets/produtos/1.png"
+                    alt="PVC Frisado Climm"
+                  />
+                </div>
+                <div class="product-content">
+                  <h3 class="product-title">PVC Frisado Climm</h3>
+                  <div class="product-tags">
+                    <span class="tag">Textura Sutil</span>
+                    <span class="tag">Elegante</span>
+                    <span class="tag">Durável</span>
+                  </div>
+                  <p class="product-description">
+                    Forro em PVC com textura sutil e elegante, que adiciona profundidade visual aos ambientes.
+                  </p>
+                  <div class="product-colors-section">
+                    <span class="colors-label">Cores:</span>
+                    <div class="product-colors">
+                      <div class="color-option" style="background-color: #fefefe;" data-color="1" title="Branco"></div>
+                      <div class="color-option" style="background-color: #661204;" data-color="2" title="Mogno"></div>
+                      <div class="color-option" style="background-color: #553129;" data-color="3" title="Nogueira"></div>
+                      <div class="color-option" style="background-color: #bd8e4e;" data-color="4" title="Cerejeira"></div>
+                    </div>
+                  </div>
+                  <button class="btn-add-cart" onclick="adicionarAoCarrinho(this)">
+                    Tenho Interesse
+                  </button>
+                </div>
+              </div>
+
+              <!-- Produto 2: PVC Liso Climm -->
+              <div class="product-card scroll-animate" data-index="1" data-product-id="liso">
+                <div class="product-image-wrapper">
+                  <img
+                    class="product-image"
+                    src="./assets/produtos/1.png"
+                    alt="PVC Liso Climm"
+                  />
+                </div>
+                <div class="product-content">
+                  <h3 class="product-title">PVC Liso Climm</h3>
+                  <div class="product-tags">
+                    <span class="tag">Matte Finish</span>
+                    <span class="tag">Moderno</span>
+                    <span class="tag">Uniforme</span>
+                  </div>
+                  <p class="product-description">
+                    Forro em PVC de superfície uniforme, proporcionando um acabamento limpo e moderno.
+                  </p>
+                  <div class="product-colors-section">
+                    <span class="colors-label">Cores:</span>
+                    <div class="product-colors">
+                      <div class="color-option" style="background-color: #fefefe;" data-color="1" title="Branco"></div>
+                      <div class="color-option" style="background-color: #661204;" data-color="2" title="Mogno"></div>
+                      <div class="color-option" style="background-color: #553129;" data-color="3" title="Nogueira"></div>
+                      <div class="color-option" style="background-color: #bd8e4e;" data-color="4" title="Cerejeira"></div>
+                    </div>
+                  </div>
+                  <button class="btn-add-cart" onclick="adicionarAoCarrinho(this)">
+                    Tenho Interesse
+                  </button>
+                </div>
+              </div>
+
+              <!-- Produto 3: Isolante Térmico Climm -->
+              <div class="product-card scroll-animate" data-index="2" data-product-id="isolante">
+                <div class="product-badge protecao">+ Proteção</div>
+                <div class="product-image-wrapper">
+                  <img
+                    class="product-image"
+                    src="./assets/images/z.png"
+                    alt="Isolante Térmico"
+                  />
+                </div>
+                <div class="product-content">
+                  <h3 class="product-title">Isolante Térmico Climm</h3>
+                  <div class="product-tags">
+                    <span class="tag">Premium</span>
+                    <span class="tag">Eficiente</span>
+                    <span class="tag">Fácil Instalação</span>
+                  </div>
+                  <p class="product-description">
+                    Isolante térmico de alta performance, compatível com todos os tipos de PVC Climm.
+                  </p>
+                  <button class="btn-add-complement" onclick="adicionarAoCarrinho(this)">
+                    <i class="fa fa-plus"></i> Adicionar Proteção
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card card2 scroll-animate" data-index="1">
-            <h3>PVC Liso Climm</h3>
-            <img
-              class="img-product liso"
-              width="300"
-              height="400"
-              src="./assets/produtos/1.png"
-              alt=""
-              style="border-radius: 0.2em"
-            />
-            <div class="info">
-              <p>
-                Forro em PVC de superfície uniforme e sem textura,
-                proporcionando um acabamento limpo e moderno para ambientes
-                residenciais e comerciais. Fabricado com alta qualidade, é
-                durável, resistente e de fácil instalação e manutenção.
-              </p>
-              <span>cores:</span>
-              <div class="colors">
-                <div
-                  id="op1"
-                  class="color cor_selected"
-                  onclick="selecionarCor(this, 'card2')"
-                ></div>
-                <div
-                  id="op2"
-                  class="color"
-                  onclick="selecionarCor(this, 'card2')"
-                ></div>
-                <div
-                  id="op3"
-                  class="color"
-                  onclick="selecionarCor(this, 'card2')"
-                ></div>
-                <div
-                  id="op4"
-                  class="color"
-                  onclick="selecionarCor(this, 'card2')"
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div class="card extra scroll-animate" data-index="2">
-            <div class="botaoAdd" onclick="mudarIcone(this)">
-              <i class="fa fa-plus"></i>
-            </div>
-            <div class="infoExtra">
-              <h3 class="extra">Adicional Isolante Térmico</h3>
-              <p class="extra">possível a todos os tipos de PVC</p>
-            </div>
-            <img
-              class="img-product"
-              width="300"
-              height="200"
-              src="./assets/images/z.png"
-              alt=""
-              style="border-radius: 0.2em"
-            />
           </div>
         </div>
       </section>
